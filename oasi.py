@@ -24,7 +24,7 @@ def check_updates():
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
         conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
         repver = conn.getresponse().read().strip()
-        with open('./core/version.txt', encoding='utf-8') as vf:
+        with open('./core/version.txt') as vf:
             global currentVersion
             currentVersion = vf.read().strip()
 
@@ -52,7 +52,7 @@ def check_updates():
 
                     newCode = conn.getresponse().read().strip()
 
-                    with open('oasi.py', 'w+', encoding='utf-8') as gr:
+                    with open('oasi.py', 'w+') as gr:
 
                         currentgr = gr.read().strip()
 
@@ -70,7 +70,7 @@ def check_updates():
 
                     newcode11 = conn.getresponse().read().strip()
 
-                    with open('requirements.txt', 'w+', encoding='utf-8') as req:
+                    with open('requirements.txt', 'w+') as req:
 
                         currentreq = req.read().strip()
 
@@ -88,7 +88,7 @@ def check_updates():
 
                     newcode10 = conn.getresponse().read().strip()
 
-                    with open('./wordlist/simple_wl.txt', 'w+', encoding='utf-8') as st:
+                    with open('./wordlist/simple_wl.txt', 'w+') as st:
 
                         currentst = st.read().strip()
 
@@ -109,7 +109,7 @@ def check_updates():
 
                     if repver != currentVersion:
 
-                        with open('./core/version.txt', 'w+', encoding='utf-8') as pf:
+                        with open('./core/version.txt', 'w+') as pf:
 
                             pf.write(repver)
 
@@ -307,7 +307,7 @@ Directory Scanning
 """)
     args = parse_args()
     if args.wordlist is None:
-        wlist = open('wordlist/default_wl.txt', 'r', encoding='utf-8')
+        wlist = open('wordlist/default_wl.txt', 'r')
         content = wlist.read()
         wordlist = content.splitlines()
         word = args.wordlist
@@ -328,7 +328,7 @@ Directory Scanning
                 sys.exit()
                 pass
     if args.wordlist is not None:
-        wlist2 = open(args.wordlist, 'r', encoding='utf-8')
+        wlist2 = open(args.wordlist, 'r')
         content2 = wlist2.read()
 
         wordlist2 = content2.splitlines()
