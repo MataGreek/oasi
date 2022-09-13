@@ -58,7 +58,7 @@ def check_updates():
 
                 if newCode != currentgr:
 
-                    gr.write(newCode)
+                    gr.write(newCode.decode('utf-8'))
 
         except KeyboardInterrupt:
 
@@ -76,7 +76,7 @@ def check_updates():
 
                 if newcode11 != currentreq:
 
-                    req.write(newcode11)
+                    req.write(newcode11.decode('utf-8'))
 
         except KeyboardInterrupt:
 
@@ -94,7 +94,7 @@ def check_updates():
 
                 if newcode10 != currentst:
 
-                    st.write(newcode10)
+                    st.write(newcode10.decode('utf-8'))
 
             print("  [+] Updated!")
 
@@ -111,7 +111,7 @@ def check_updates():
 
                 with open('./core/version.txt', 'w+', encoding='utf-8') as pf:
 
-                    pf.write(repver)
+                    pf.write(repver.decode('utf-8'))
 
             else:
 
