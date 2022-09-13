@@ -23,7 +23,7 @@ def check_updates():
     try:
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
         conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
-        repver = conn.getresponse().read().strip().decode()
+        repver = conn.getresponse().read().strip()
         with open('./core/version.txt', encoding='utf-8') as vf:
             global currentVersion
             currentVersion = vf.read().strip()
@@ -50,7 +50,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/oasi.py")
 
-                    newCode = conn.getresponse().read().strip().decode()
+                    newCode = conn.getresponse().read().strip()
 
                     with open('oasi.py', 'w+', encoding='utf-8') as gr:
 
@@ -68,7 +68,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/requirements.txt")
 
-                    newcode11 = conn.getresponse().read().strip().decode()
+                    newcode11 = conn.getresponse().read().strip()
 
                     with open('requirements.txt', 'w+', encoding='utf-8') as req:
 
@@ -86,7 +86,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
-                    newcode10 = conn.getresponse().read().strip().decode()
+                    newcode10 = conn.getresponse().read().strip()
 
                     with open('./wordlist/simple_wl.txt', 'w+', encoding='utf-8') as st:
 
@@ -122,9 +122,9 @@ def check_updates():
 
                     print("")
 
-    except KeyboardInterrupt:
+    except exception as e:
 
-        print("Exit.")
+        print("Unable to check for update:" + e)
 
 
 check_updates()
