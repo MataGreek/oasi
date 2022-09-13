@@ -121,10 +121,9 @@ def check_updates():
         except KeyboardInterrupt:
 
             print("")
+    except Exception as e:
 
-    except exception as e:
-
-        print("Unable to check for update:" + e)
+        print("Unable to check for update:" + str(e))
 
 
 def parse_args():
