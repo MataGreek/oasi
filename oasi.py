@@ -126,6 +126,9 @@ def check_updates():
         print("Unable to check for update:" + str(e))
 
 
+check_updates()
+
+
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
@@ -345,7 +348,6 @@ Directory Scanning
 
 
 def main():
-    check_updates()
     Banner()
     time.sleep(1)
     check_host()
