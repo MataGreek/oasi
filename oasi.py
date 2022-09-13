@@ -34,14 +34,14 @@ def check_updates():
 
             print("")
         else:
-            ask = input("  [+] Version "+str(repver) +
-                        " Is Available! Do you want to update? [Y/n]:   ")
+            ask = input(b"  [+] Version "+str(repver) +
+                        b" Is Available! Do you want to update? [Y/n]:   ")
 
             if ask in yes_choice:
 
                 print("")
 
-                print("  [!] Updating... Please do not close your application.")
+                print(b"  [!] Updating... Please do not close your application.")
 
                 print("")
 
@@ -60,11 +60,11 @@ def check_updates():
 
                         if newCode != currentgr:
 
-                            gr.write(newCode.decode('utf-8'))
+                            gr.write(newCode)
 
                 except KeyboardInterrupt:
 
-                    print("Exit.")
+                    print(b"Exit.")
                 try:
 
                     conn.request(
@@ -78,11 +78,11 @@ def check_updates():
 
                         if newcode11 != currentreq:
 
-                            req.write(newcode11.decode('utf-8'))
+                            req.write(newcode11)
 
                 except KeyboardInterrupt:
 
-                    print("exit.")
+                    print(b"exit.")
                 try:
 
                     conn.request(
@@ -96,21 +96,21 @@ def check_updates():
 
                         if newcode10 != currentst:
 
-                            st.write(newcode10.decode('utf-8'))
+                            st.write(newcode10)
 
                 except KeyboardInterrupt:
 
-                    print("exit.")
-                    print("")
+                    print(b"exit.")
+                    print(b"")
 
-                    print("  [+] Updated!")
+                    print(b"  [+] Updated!")
 
                     time.sleep(1)
 
-                    print("")
+                    print(b"")
                     print(
-                        " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
-                    print("")
+                        b" RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
+                    print(b"")
 
                     pass
 
@@ -118,20 +118,20 @@ def check_updates():
 
                         with open('./core/version.txt', 'w+') as pf:
 
-                            pf.write(repver.decode('utf-8'))
+                            pf.write(repver)
 
                     else:
 
-                        print(" [!] Your version is:", currentVersion +
-                              "You are not up to date! Please update the program.")
+                        print(b" [!] Your version is:", currentVersion +
+                              b"You are not up to date! Please update the program.")
 
     except KeyboardInterrupt:
 
-        print("")
+        print(b"")
 
     except Exception as e:
 
-        print("Unable to Check for Update, Error:", str(e))
+        print(b"Unable to Check for Update, Error:", str(e))
 
 
 check_updates()
@@ -185,7 +185,7 @@ def check_host():
    Host
 -----------
     """)
-    print("Checking Target...")
+    print(b"Checking Target...")
     time.sleep(2)
     args = parse_args()
     global target
@@ -204,11 +204,11 @@ Subdomains
     """)
 
     subdomains = []
-    print("Checking possible Subdomains...\n")
+    print(b"Checking possible Subdomains...\n")
     req = r.get(f"https://crt.sh/?q=%.{target}&output=json")
 
     if req.status_code != 200:
-        print("info not available")
+        print(b"info not available")
         sys.exit(1)
 
     for (key, value) in enumerate(req.json()):
@@ -238,7 +238,7 @@ DNS Lookup
             count += 1
         print(f"\n\nFound: {count} Results!")
     except KeyboardInterrupt:
-        print("\n Exiting Dns Lookup...")
+        print(b"\n Exiting Dns Lookup...")
         pass
         time.sleep(1)
 
@@ -260,7 +260,7 @@ Checking Domains On the same Host
             urlsweb.append(newurl)
             print(newurl)
     except KeyboardInterrupt:
-        print("\n Exiting Dns Lookup...")
+        print(b"\n Exiting Dns Lookup...")
         pass
         time.sleep(1)
 
@@ -273,7 +273,7 @@ Usual Ports
 -----------
     """)
 
-    print("\nChecking usual Ports...\n")
+    print(b"\nChecking usual Ports...\n")
     time.sleep(1)
     try:
         for port in range(1, 3306):
@@ -283,27 +283,27 @@ Usual Ports
             result = s.connect_ex((host, port))
             if result == 0:
                 sn = socket.getservbyport(port)
-                print("[*] Port {} is open".format(port) +
-                      "    Service: ", sn)
+                print(b"[*] Port {} is open".format(port) +
+                      b"    Service: ", sn)
 
                 s.close()
     except KeyboardInterrupt:
-        print("\n Exiting Port Scanner...")
+        print(b"\n Exiting Port Scanner...")
         pass
         time.sleep(1)
 
     except socket.error:
-        print("\n Host is not responding...")
+        print(b"\n Host is not responding...")
         sys.exit()
 
 
 def inputer():
-    user_choice = input("\n\nDo you want to continue the scanning?(Y/n): ")
+    user_choice = input(b"\n\nDo you want to continue the scanning?(Y/n): ")
 
     if user_choice in yes_choice:
         pass
     if user_choice in no_choice:
-        print("Exiting...")
+        print(b"Exiting...")
         sys.exit()
 
 
@@ -326,14 +326,14 @@ Directory Scanning
 
                 req = r.get(link)
                 if req.status_code == 200:
-                    print("\n[+] Directory Found: ", str(link) +
-                          "   (Status: " + str(req.status_code) + ")    ")
+                    print(b"\n[+] Directory Found: ", str(link) +
+                          b"   (Status: " + str(req.status_code) + ")    ")
                 if req.status_code != 200:
                     spaces = ' ' * 10
-                    print("\rScanning: " + str(path) + str(spaces), end='')
+                    print(b"\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
-                print("\n[!] Exit.")
+                print(b"\n[!] Exit.")
                 sys.exit()
                 pass
     if args.wordlist is not None:
@@ -348,14 +348,14 @@ Directory Scanning
 
                 req2 = r.get(link2)
                 if req2.status_code == 200:
-                    print("\n[+] Directory Found: ", str(link2) +
-                          "   (Status: " + str(req2.status_code) + ")    ")
+                    print(b"\n[+] Directory Found: ", str(link2) +
+                          b"   (Status: " + str(req2.status_code) + ")    ")
                 if req2.status_code != 200:
                     spaces = ' ' * 10
-                    print("\rScanning: " + str(path) + str(spaces), end='')
+                    print(b"\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
-                print("\n[!] Exit.")
+                print(b"\n[!] Exit.")
                 sys.exit()
 
 
