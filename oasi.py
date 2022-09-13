@@ -122,9 +122,9 @@ def check_updates():
 
                     print("")
 
-    except Exception as e:
+    except KeyboardInterrupt:
 
-        print("Unable to Check for Update, Error:", str(e))
+        print("Exit.")
 
 
 check_updates()
