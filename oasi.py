@@ -32,7 +32,7 @@ def check_updates():
 
             print("")
         else:
-            ask = input("  [+] Version "+str(repver) +
+            ask = input("  [+] Version " + repver +
                         " Is Available! Do you want to update? [Y/n]:   ")
 
             if ask in yes_choice:
