@@ -145,9 +145,7 @@ def parse_args():
 def Banner():
     print(f"""
     
-{currentVersion}
-                              
-                              
+  Version: {currentVersion}                                                        
 
   |  -----------------------------------------------------------
   |  Author: Mata
