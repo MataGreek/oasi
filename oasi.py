@@ -96,11 +96,6 @@ def check_updates():
 
                             st.write(newcode10)
 
-                except KeyboardInterrupt:
-
-                    print("exit.")
-                    print("")
-
                     print("  [+] Updated!")
 
                     time.sleep(1)
@@ -123,9 +118,9 @@ def check_updates():
                         print(" [!] Your version is:", currentVersion +
                               "You are not up to date! Please update the program.")
 
-    except KeyboardInterrupt:
+                except KeyboardInterrupt:
 
-        print("")
+                    print("")
 
     except Exception as e:
 
