@@ -140,9 +140,10 @@ def parse_args():
 
 
 def Banner():
+    print(currentVersion)
     print(f"""
     
-   ____           _____ _____ v{currentVersion}
+   ____           _____ _____ 
   / __ \   /\    / ____|_   _|
  | |  | | /  \  | (___   | |  
  | |  | |/ /\ \  \___ \  | |  
