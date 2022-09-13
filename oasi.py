@@ -45,89 +45,86 @@ def check_updates():
 
                 time.sleep(4)
 
-                try:
+        try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/oasi.py")
+            conn.request(
+                "GET", "/MataGreek/oasi/main/oasi.py")
 
-                    newCode = conn.getresponse().read().strip()
+            newCode = conn.getresponse().read().strip()
 
-                    with open('oasi.py', 'w+') as gr:
+            with open('oasi.py', 'w+') as gr:
 
-                        currentgr = gr.read().strip()
+                currentgr = gr.read().strip()
 
-                        if newCode != currentgr:
+                if newCode != currentgr:
 
-                            gr.write(newCode)
+                    gr.write(newCode)
 
-                except KeyboardInterrupt:
+        except KeyboardInterrupt:
 
-                    print("Exit.")
-                try:
+            print("Exit.")
+        try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/requirements.txt")
+            conn.request(
+                "GET", "/MataGreek/oasi/main/requirements.txt")
 
-                    newcode11 = conn.getresponse().read().strip()
+            newcode11 = conn.getresponse().read().strip()
 
-                    with open('requirements.txt', 'w+') as req:
+            with open('requirements.txt', 'w+') as req:
 
-                        currentreq = req.read().strip()
+                currentreq = req.read().strip()
 
-                        if newcode11 != currentreq:
+                if newcode11 != currentreq:
 
-                            req.write(newcode11)
+                    req.write(newcode11)
 
-                except KeyboardInterrupt:
+        except KeyboardInterrupt:
 
-                    print("exit.")
-                try:
+            print("exit.")
+        try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
+            conn.request(
+                "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
-                    newcode10 = conn.getresponse().read().strip()
+            newcode10 = conn.getresponse().read().strip()
 
-                    with open('./wordlist/simple_wl.txt', 'w+') as st:
+            with open('./wordlist/simple_wl.txt', 'w+') as st:
 
-                        currentst = st.read().strip()
+                currentst = st.read().strip()
 
-                        if newcode10 != currentst:
+                if newcode10 != currentst:
 
-                            st.write(newcode10)
+                    st.write(newcode10)
 
-                    print("  [+] Updated!")
+            print("  [+] Updated!")
 
-                    time.sleep(1)
+            time.sleep(1)
 
-                    print("")
-                    print(
-                        " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
-                    print("")
+            print("")
+            print(
+                " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
+            print("")
 
-                    pass
+            pass
 
-                    if repver != currentVersion:
+            if repver != currentVersion:
 
-                        with open('./core/version.txt', 'w+') as pf:
+                with open('./core/version.txt', 'w+') as pf:
 
-                            pf.write(repver)
+                    pf.write(repver)
 
-                    else:
+            else:
 
-                        print(" [!] Your version is:", currentVersion +
-                              "You are not up to date! Please update the program.")
+                print(" [!] Your version is:", currentVersion +
+                      "You are not up to date! Please update the program.")
 
-                except KeyboardInterrupt:
+        except KeyboardInterrupt:
 
-                    print("")
+            print("")
 
     except exception as e:
 
         print("Unable to check for update:" + e)
-
-
-check_updates()
 
 
 def parse_args():
@@ -135,8 +132,6 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', type=str, metavar='',
                         required=True, help='Insert the target URL')
-    # parser.add_argument('-o', '--output', type=str, metavar='',
-    #                     required=False, help='Create output file')
     parser.add_argument('-w', '--wordlist', type=str, metavar='',
                         required=False, help='Enter wordlist file (Leave it empty for default wordlist)')
     return parser.parse_args()
@@ -351,6 +346,7 @@ Directory Scanning
 
 
 def main():
+    check_updates()
     Banner()
     time.sleep(1)
     check_host()
