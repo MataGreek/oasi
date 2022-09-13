@@ -326,11 +326,11 @@ Directory Scanning
 
                 req = r.get(link)
                 if req.status_code == 200:
-                    print(b"\n[+] Directory Found: ", str(link) +
-                          b"   (Status: " + str(req.status_code) + ")    ")
+                    print("\n[+] Directory Found: ", str(link) +
+                          "   (Status: " + str(req.status_code) + ")    ")
                 if req.status_code != 200:
                     spaces = ' ' * 10
-                    print(b"\rScanning: " + str(path) + str(spaces), end='')
+                    print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
                 print(b"\n[!] Exit.")
@@ -348,11 +348,11 @@ Directory Scanning
 
                 req2 = r.get(link2)
                 if req2.status_code == 200:
-                    print(b"\n[+] Directory Found: ", str(link2) +
-                          b"   (Status: " + str(req2.status_code) + ")    ")
+                    print("\n[+] Directory Found: ", str(link2) +
+                          "   (Status: " + str(req2.status_code) + ")    ")
                 if req2.status_code != 200:
                     spaces = ' ' * 10
-                    print(b"\rScanning: " + str(path) + str(spaces), end='')
+                    print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
                 print(b"\n[!] Exit.")
