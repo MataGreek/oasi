@@ -127,9 +127,8 @@ def check_updates():
 
         print("")
 
-    except Exception as e:
-
-        print("Unable to Check for Update, Error:", str(e))
+    except ConnectionError as e:
+        print(e)
 
 
 check_updates()
