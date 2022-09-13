@@ -22,7 +22,7 @@ no_choice = ['No', 'n', 'no', 'NO', 'N']
 def check_updates():
     try:
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
-        conn.request(b"GET", "/MataGreek/oasi/main/core/version.txt")
+        conn.request(b'GET', "/MataGreek/oasi/main/core/version.txt")
         repver = conn.getresponse().read().strip()
         with open('./core/version.txt', encoding='utf-8') as vf:
             global currentVersion
@@ -48,7 +48,7 @@ def check_updates():
         try:
 
             conn.request(
-                b"GET", "/MataGreek/oasi/main/oasi.py")
+                b'GET', "/MataGreek/oasi/main/oasi.py")
 
             newCode = conn.getresponse().read().strip()
 
@@ -66,7 +66,7 @@ def check_updates():
         try:
 
             conn.request(
-                b"GET", "/MataGreek/oasi/main/requirements.txt")
+                b'GET', "/MataGreek/oasi/main/requirements.txt")
 
             newcode11 = conn.getresponse().read().strip()
 
@@ -84,7 +84,7 @@ def check_updates():
         try:
 
             conn.request(
-                b"GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
+                b'GET', "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
             newcode10 = conn.getresponse().read().strip()
 
