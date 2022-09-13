@@ -127,8 +127,9 @@ def check_updates():
 
         print("")
 
-    except ConnectionError as e:
-        print(e)
+    except Exception as e:
+
+        print("Unable to Check for Update, Error:", str(e))
 
 
 check_updates()
@@ -149,7 +150,7 @@ def parse_args():
 def Banner():
     print(f"""
     
-   ____           _____ _____ 
+   ____           _____ _____ {currentVersion}
   / __ \   /\    / ____|_   _|
  | |  | | /  \  | (___   | |  
  | |  | |/ /\ \  \___ \  | |  
