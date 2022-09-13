@@ -70,7 +70,7 @@ def check_updates():
 
             newcode11 = conn.getresponse().read().strip()
 
-            with open('requirements.txt', 'w+', encoding='utf-8') as req:
+            with open('requirements.txt', 'wb+', encoding='utf-8') as req:
 
                 currentreq = req.read().strip()
 
@@ -88,7 +88,7 @@ def check_updates():
 
             newcode10 = conn.getresponse().read().strip()
 
-            with open('./wordlist/simple_wl.txt', 'w+', encoding='utf-8') as st:
+            with open('./wordlist/simple_wl.txt', 'wb+', encoding='utf-8') as st:
 
                 currentst = st.read().strip()
 
@@ -109,7 +109,7 @@ def check_updates():
 
             if repver != currentVersion:
 
-                with open('./core/version.txt', 'w+', encoding='utf-8') as pf:
+                with open('./core/version.txt', 'wb+', encoding='utf-8') as pf:
 
                     pf.write(repver.decode('utf-8'))
 
