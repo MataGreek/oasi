@@ -34,8 +34,8 @@ def check_updates():
 
             print("")
         else:
-            ask = input(b"  [+] Version "+str(repver) +
-                        b" Is Available! Do you want to update? [Y/n]:   ")
+            ask = input("  [+] Version "+str(repver) +
+                        " Is Available! Do you want to update? [Y/n]:   ")
 
             if ask in yes_choice:
 
@@ -122,8 +122,8 @@ def check_updates():
 
                     else:
 
-                        print(b" [!] Your version is:", currentVersion +
-                              b"You are not up to date! Please update the program.")
+                        print(" [!] Your version is:", currentVersion +
+                              "You are not up to date! Please update the program.")
 
     except KeyboardInterrupt:
 
@@ -131,7 +131,7 @@ def check_updates():
 
     except Exception as e:
 
-        print(b"Unable to Check for Update, Error:", str(e))
+        print("Unable to Check for Update, Error:", str(e))
 
 
 check_updates()
