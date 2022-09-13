@@ -24,7 +24,7 @@ def check_updates():
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
         conn.request('GET', "/MataGreek/oasi/main/core/version.txt")
         repver = conn.getresponse().read().strip()
-        with open('./core/version.txt', 'rb', encoding='utf-8') as vf:
+        with open('./core/version.txt', 'rb') as vf:
             global currentVersion
             currentVersion = vf.read().strip()
 
@@ -304,7 +304,7 @@ Directory Scanning
 """)
     args = parse_args()
     if args.wordlist is None:
-        wlist = open('wordlist/default_wl.txt', 'rb', encoding='utf-8')
+        wlist = open('wordlist/default_wl.txt', 'rb')
         content = wlist.read()
         wordlist = content.splitlines()
         word = args.wordlist
@@ -325,7 +325,7 @@ Directory Scanning
                 sys.exit()
                 pass
     if args.wordlist is not None:
-        wlist2 = open(args.wordlist, 'rb', encoding='utf-8')
+        wlist2 = open(args.wordlist, 'rb')
         content2 = wlist2.read()
 
         wordlist2 = content2.splitlines()
