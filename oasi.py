@@ -22,9 +22,9 @@ no_choice = ['No', 'n', 'no', 'NO', 'N']
 def check_updates():
     try:
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
-        conn.request('GET', "/MataGreek/oasi/main/core/version.txt")
-        repver = conn.getresponse().read().strip()
-        with open('./core/version.txt', 'rb') as vf:
+        conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
+        repver = conn.getresponse().read().strip().decode()
+        with open('./core/version.txt') as vf:
             global currentVersion
             currentVersion = vf.read().strip()
 
@@ -32,8 +32,8 @@ def check_updates():
 
             print("")
         else:
-            ask = input(
-                f"  [+] Version {repver} Is Available! Do you want to update? [Y/n]:   ")
+            ask = input("  [+] Version "+str(repver) +
+                        " Is Available! Do you want to update? [Y/n]:   ")
 
             if ask in yes_choice:
 
@@ -45,85 +45,91 @@ def check_updates():
 
                 time.sleep(4)
 
-        try:
+                try:
 
-            conn.request(
-                'GET', "/MataGreek/oasi/main/oasi.py")
+                    conn.request(
+                        "GET", "/MataGreek/oasi/main/oasi.py")
 
-            newCode = conn.getresponse().read().strip()
+                    newCode = conn.getresponse().read().strip().decode()
 
-            with open('oasi.py', 'wb+') as gr:
+                    with open('oasi.py', 'w+') as gr:
 
-                currentgr = gr.read().strip()
+                        currentgr = gr.read().strip()
 
-                if newCode != currentgr:
+                        if newCode != currentgr:
 
-                    gr.write(newCode.decode('utf-8'))
+                            gr.write(newCode)
 
-        except KeyboardInterrupt:
+                except KeyboardInterrupt:
 
-            print("Exit.")
-        try:
+                    print("Exit.")
+                try:
 
-            conn.request(
-                'GET', "/MataGreek/oasi/main/requirements.txt")
+                    conn.request(
+                        "GET", "/MataGreek/oasi/main/requirements.txt")
 
-            newcode11 = conn.getresponse().read().strip()
+                    newcode11 = conn.getresponse().read().strip().decode()
 
-            with open('requirements.txt', 'wb+') as req:
+                    with open('requirements.txt', 'w+') as req:
 
-                currentreq = req.read().strip()
+                        currentreq = req.read().strip()
 
-                if newcode11 != currentreq:
+                        if newcode11 != currentreq:
 
-                    req.write(newcode11.decode('utf-8'))
+                            req.write(newcode11)
 
-        except KeyboardInterrupt:
+                except KeyboardInterrupt:
 
-            print("exit.")
-        try:
+                    print("exit.")
+                try:
 
-            conn.request(
-                'GET', "/MataGreek/oasi/main/wordlist/simple_wl.txt")
+                    conn.request(
+                        "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
-            newcode10 = conn.getresponse().read().strip()
+                    newcode10 = conn.getresponse().read().strip().decode()
 
-            with open('./wordlist/simple_wl.txt', 'wb+') as st:
+                    with open('./wordlist/simple_wl.txt', 'w+') as st:
 
-                currentst = st.read().strip()
+                        currentst = st.read().strip()
 
-                if newcode10 != currentst:
+                        if newcode10 != currentst:
 
-                    st.write(newcode10.decode('utf-8'))
+                            st.write(newcode10)
 
-            print("  [+] Updated!")
+                except KeyboardInterrupt:
 
-            time.sleep(1)
+                    print("exit.")
+                    print("")
 
-            print("")
-            print(
-                " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
-            print("")
+                    print("  [+] Updated!")
 
-            pass
+                    time.sleep(1)
 
-            if repver != currentVersion:
+                    print("")
+                    print(
+                        " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
+                    print("")
 
-                with open('./core/version.txt', 'wb+') as pf:
+                    pass
 
-                    pf.write(repver.decode('utf-8'))
+                    if repver != currentVersion:
 
-            else:
+                        with open('./core/version.txt', 'w+') as pf:
 
-                print(" [!] Your version is:", currentVersion +
-                      "You are not up to date! Please update the program.")
+                            pf.write(repver)
 
-        except KeyboardInterrupt:
+                    else:
 
-            print("")
+                        print(" [!] Your version is:", currentVersion +
+                              "You are not up to date! Please update the program.")
+
+    except KeyboardInterrupt:
+
+        print("")
+
     except Exception as e:
 
-        print("Unable to check for update:" + str(e))
+        print("Unable to Check for Update, Error:", str(e))
 
 
 check_updates()
@@ -134,13 +140,14 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-u', '--url', type=str, metavar='',
                         required=True, help='Insert the target URL')
+    # parser.add_argument('-o', '--output', type=str, metavar='',
+    #                     required=False, help='Create output file')
     parser.add_argument('-w', '--wordlist', type=str, metavar='',
                         required=False, help='Enter wordlist file (Leave it empty for default wordlist)')
     return parser.parse_args()
 
 
 def Banner():
-    print(b'version'+currentVersion)
     print(f"""
     
    ____           _____ _____ 
@@ -220,6 +227,7 @@ DNS Lookup
 
     urlsweb = []
     try:
+        borders = []
         targeturl = f"https://api.programion.com/dns/dnsjson.php?api_key=a63233b816dfd48d392c4a4491d82008&domain={target}"
         for line in urllib.request.urlopen(targeturl):
             newurl = str(line)
@@ -243,6 +251,7 @@ Checking Domains On the same Host
 
     urlsweb = []
     try:
+        borders = []
         targeturl = f"https://api.viewdns.info/reverseip/?host={target}&apikey=c9ce6f82bb48fed1383384feba956888cd1c8973&output=json"
         for line in urllib.request.urlopen(targeturl):
             newurl = str(line)
@@ -305,7 +314,7 @@ Directory Scanning
 """)
     args = parse_args()
     if args.wordlist is None:
-        wlist = open('wordlist/default_wl.txt', 'rb')
+        wlist = open('wordlist/default_wl.txt', 'r')
         content = wlist.read()
         wordlist = content.splitlines()
         word = args.wordlist
@@ -326,7 +335,7 @@ Directory Scanning
                 sys.exit()
                 pass
     if args.wordlist is not None:
-        wlist2 = open(args.wordlist, 'rb')
+        wlist2 = open(args.wordlist, 'r')
         content2 = wlist2.read()
 
         wordlist2 = content2.splitlines()
