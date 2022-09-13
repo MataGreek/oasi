@@ -1,5 +1,7 @@
 from ast import arg, parse
+from base64 import decode
 from cmath import e
+import encodings
 from logging import exception
 from re import L
 from tabnanny import check
@@ -23,7 +25,7 @@ def check_updates():
     try:
         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
         conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
-        repver = conn.getresponse().read().strip()
+        repver = conn.getresponse().read().strip().decode()
         with open('./core/version.txt') as vf:
             global currentVersion
             currentVersion = vf.read().strip()
@@ -50,7 +52,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/oasi.py")
 
-                    newCode = conn.getresponse().read().strip()
+                    newCode = conn.getresponse().read().strip().decode()
 
                     with open('oasi.py', 'w+') as gr:
 
@@ -58,7 +60,7 @@ def check_updates():
 
                         if newCode != currentgr:
 
-                            gr.write(newCode)
+                            gr.write(newCode).encode()
 
                 except KeyboardInterrupt:
 
@@ -68,7 +70,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/requirements.txt")
 
-                    newcode11 = conn.getresponse().read().strip()
+                    newcode11 = conn.getresponse().read().strip().decode()
 
                     with open('requirements.txt', 'w+') as req:
 
@@ -76,7 +78,7 @@ def check_updates():
 
                         if newcode11 != currentreq:
 
-                            req.write(newcode11)
+                            req.write(newcode11).encode()
 
                 except KeyboardInterrupt:
 
@@ -86,7 +88,7 @@ def check_updates():
                     conn.request(
                         "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
-                    newcode10 = conn.getresponse().read().strip()
+                    newcode10 = conn.getresponse().read().strip().decode()
 
                     with open('./wordlist/simple_wl.txt', 'w+') as st:
 
@@ -94,7 +96,7 @@ def check_updates():
 
                         if newcode10 != currentst:
 
-                            st.write(newcode10)
+                            st.write(newcode10).encode()
 
                 except KeyboardInterrupt:
 
@@ -116,7 +118,7 @@ def check_updates():
 
                         with open('./core/version.txt', 'w+') as pf:
 
-                            pf.write(repver)
+                            pf.write(repver).encode()
 
                     else:
 
