@@ -1,6 +1,14 @@
+<center>
+
 # <b> OASI
 
+</center>
+
+<center>
+
 ![](images/2.1.png)
+
+</center>
 
 ## <b> OASI script coded by Mata.
 
