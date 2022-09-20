@@ -21,120 +21,120 @@ yes_choice = ['', 'Yes', 'y', 'Y', 'yes', 'YES']
 no_choice = ['No', 'n', 'no', 'NO', 'N']
 
 
-def check_updates():
-    try:
-        conn = httplib.HTTPSConnection("raw.githubusercontent.com")
-        conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
-        repver = conn.getresponse().read().strip().decode()
-        with open('./core/version.txt') as vf:
-            global currentVersion
-            currentVersion = vf.read().strip()
+# def check_updates():
+#     try:
+#         conn = httplib.HTTPSConnection("raw.githubusercontent.com")
+#         conn.request("GET", "/MataGreek/oasi/main/core/version.txt")
+#         repver = conn.getresponse().read().strip().decode()
+#         with open('./core/version.txt') as vf:
+#             global currentVersion
+#             currentVersion = vf.read().strip()
 
-        if repver == currentVersion:
+#         if repver == currentVersion:
 
-            print("")
-        else:
-            ask = input("  [+] Version "+str(repver) +
-                        " Is Available! Do you want to update? [Y/n]:   ")
+#             print("")
+#         else:
+#             ask = input("  [+] Version "+str(repver) +
+#                         " Is Available! Do you want to update? [Y/n]:   ")
 
-            if ask in yes_choice:
+#             if ask in yes_choice:
 
-                print("")
+#                 print("")
 
-                print(b"  [!] Updating... Please do not close your application.")
+#                 print("  [!] Updating... Please do not close your application.")
 
-                print("")
+#                 print("")
 
-                time.sleep(4)
+#                 time.sleep(4)
 
-                try:
+#                 try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/oasi.py")
+#                     conn.request(
+#                         "GET", "/MataGreek/oasi/main/oasi.py")
 
-                    newCode = conn.getresponse().read().strip().decode()
+#                     newCode = conn.getresponse().read().strip().decode()
 
-                    with open('oasi.py', 'w+') as gr:
+#                     with open('oasi.py', 'w+') as gr:
 
-                        currentgr = gr.read().strip()
+#                         currentgr = gr.read().strip()
 
-                        if newCode != currentgr:
+#                         if newCode != currentgr:
 
-                            gr.write(newCode)
+#                             gr.write(newCode)
 
-                except KeyboardInterrupt:
+#                 except KeyboardInterrupt:
 
-                    print(b"Exit.")
-                try:
+#                     print("Exit.")
+#                 try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/requirements.txt")
+#                     conn.request(
+#                         "GET", "/MataGreek/oasi/main/requirements.txt")
 
-                    newcode11 = conn.getresponse().read().strip().decode()
+#                     newcode11 = conn.getresponse().read().strip().decode()
 
-                    with open('requirements.txt', 'w+') as req:
+#                     with open('requirements.txt', 'w+') as req:
 
-                        currentreq = req.read().strip()
+#                         currentreq = req.read().strip()
 
-                        if newcode11 != currentreq:
+#                         if newcode11 != currentreq:
 
-                            req.write(newcode11)
+#                             req.write(newcode11)
 
-                except KeyboardInterrupt:
+#                 except KeyboardInterrupt:
 
-                    print(b"exit.")
-                try:
+#                     print("exit.")
+#                 try:
 
-                    conn.request(
-                        "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
+#                     conn.request(
+#                         "GET", "/MataGreek/oasi/main/wordlist/simple_wl.txt")
 
-                    newcode10 = conn.getresponse().read().strip().decode()
+#                     newcode10 = conn.getresponse().read().strip().decode()
 
-                    with open('./wordlist/simple_wl.txt', 'w+') as st:
+#                     with open('./wordlist/simple_wl.txt', 'w+') as st:
 
-                        currentst = st.read().strip()
+#                         currentst = st.read().strip()
 
-                        if newcode10 != currentst:
+#                         if newcode10 != currentst:
 
-                            st.write(newcode10)
+#                             st.write(newcode10)
 
-                except KeyboardInterrupt:
+#                 except KeyboardInterrupt:
 
-                    print(b"exit.")
-                    print(b"")
+#                     print("exit.")
+#                     print("")
 
-                    print(b"  [+] Updated!")
+#                     print("  [+] Updated!")
 
-                    time.sleep(1)
+#                     time.sleep(1)
 
-                    print(b"")
-                    print(
-                        b" RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
-                    print(b"")
+#                     print("")
+#                     print(
+#                         " RESTART THE PROGRAM FOR UPDATES TAKE AFFECT")
+#                     print("")
 
-                    pass
+#                     pass
 
-                    if repver != currentVersion:
+#                     if repver != currentVersion:
 
-                        with open('./core/version.txt', 'w+') as pf:
+#                         with open('./core/version.txt', 'w+') as pf:
 
-                            pf.write(repver)
+#                             pf.write(repver).encode()
 
-                    else:
+#                     else:
 
-                        print(" [!] Your version is:", currentVersion +
-                              "You are not up to date! Please update the program.")
+#                         print(" [!] Your version is:", currentVersion +
+#                               "You are not up to date! Please update the program.")
 
-    except KeyboardInterrupt:
+#     except KeyboardInterrupt:
 
-        print(b"")
+#         print("")
 
-    except Exception as e:
+#     except Exception as e:
 
-        print("Unable to Check for Update, Error:", str(e))
+#         print("Unable to Check for Update, Error:", str(e))
 
 
-check_updates()
+# check_updates()
 
 
 def parse_args():
@@ -152,7 +152,7 @@ def parse_args():
 def Banner():
     print(f"""
     
-   ____           _____ _____ {currentVersion}
+   ____           _____ _____ 
   / __ \   /\    / ____|_   _|
  | |  | | /  \  | (___   | |  
  | |  | |/ /\ \  \___ \  | |  
@@ -185,7 +185,7 @@ def check_host():
    Host
 -----------
     """)
-    print(b"Checking Target...")
+    print("Checking Target...")
     time.sleep(2)
     args = parse_args()
     global target
@@ -204,11 +204,11 @@ Subdomains
     """)
 
     subdomains = []
-    print(b"Checking possible Subdomains...\n")
+    print("Checking possible Subdomains...\n")
     req = r.get(f"https://crt.sh/?q=%.{target}&output=json")
 
     if req.status_code != 200:
-        print(b"info not available")
+        print("info not available")
         sys.exit(1)
 
     for (key, value) in enumerate(req.json()):
@@ -238,7 +238,7 @@ DNS Lookup
             count += 1
         print(f"\n\nFound: {count} Results!")
     except KeyboardInterrupt:
-        print(b"\n Exiting Dns Lookup...")
+        print("\n Exiting Dns Lookup...")
         pass
         time.sleep(1)
 
@@ -260,7 +260,7 @@ Checking Domains On the same Host
             urlsweb.append(newurl)
             print(newurl)
     except KeyboardInterrupt:
-        print(b"\n Exiting Dns Lookup...")
+        print("\n Exiting Dns Lookup...")
         pass
         time.sleep(1)
 
@@ -273,7 +273,7 @@ Usual Ports
 -----------
     """)
 
-    print(b"\nChecking usual Ports...\n")
+    print("\nChecking usual Ports...\n")
     time.sleep(1)
     try:
         for port in range(1, 3306):
@@ -283,27 +283,27 @@ Usual Ports
             result = s.connect_ex((host, port))
             if result == 0:
                 sn = socket.getservbyport(port)
-                print(b"[*] Port {} is open".format(port) +
-                      b"    Service: ", sn)
+                print("[*] Port {} is open".format(port) +
+                      "    Service: ", sn)
 
                 s.close()
     except KeyboardInterrupt:
-        print(b"\n Exiting Port Scanner...")
+        print("\n Exiting Port Scanner...")
         pass
         time.sleep(1)
 
     except socket.error:
-        print(b"\n Host is not responding...")
+        print("\n Host is not responding...")
         sys.exit()
 
 
 def inputer():
-    user_choice = input(b"\n\nDo you want to continue the scanning?(Y/n): ")
+    user_choice = input("\n\nDo you want to continue the scanning?(Y/n): ")
 
     if user_choice in yes_choice:
         pass
     if user_choice in no_choice:
-        print(b"Exiting...")
+        print("Exiting...")
         sys.exit()
 
 
@@ -333,7 +333,7 @@ Directory Scanning
                     print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
-                print(b"\n[!] Exit.")
+                print("\n[!] Exit.")
                 sys.exit()
                 pass
     if args.wordlist is not None:
@@ -355,7 +355,7 @@ Directory Scanning
                     print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
-                print(b"\n[!] Exit.")
+                print("\n[!] Exit.")
                 sys.exit()
 
 
