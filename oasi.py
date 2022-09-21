@@ -15,6 +15,7 @@ import urllib3
 import sys
 import time
 import colorama
+from colorama import *
 colorama.init()
 
 yes_choice = ['', 'Yes', 'y', 'Y', 'yes', 'YES']
@@ -218,6 +219,35 @@ Subdomains
         print(f'{s}')
 
 
+def upload_directory():
+    print("")
+    print("")
+    print("""
+-----------------------------------
+Checking for upload directories...
+-----------------------------------
+    """)
+    print("")
+    print("")
+    time.sleep(2)
+    upload_dir_wp = f"http://{target}/wp-content/uploads/"
+    upload_dir_simple = f"http://{target}/uploads/"
+    request = r.get(upload_dir_simple)
+    requestwp = r.get(upload_dir_wp)
+
+    if requestwp.status_code == 200:
+        print(Fore.RED + "[IMPORTANT]" + Fore.RESET +
+              " Wordpress Upload directory is open: " + upload_dir_wp)
+    elif request.status_code == 200:
+        print(Fore.RED + "[IMPORTANT]" + Fore.RESET +
+              " Upload directory is open: " + upload_dir_simple)
+    else:
+        print("No Possible upload directory found.")
+    time.sleep(2)
+    print("")
+    print("")
+
+
 def dnslookup():
     time.sleep(1)
     print(f"""
@@ -367,6 +397,8 @@ def main():
     dnslookup()
     time.sleep(1)
     reverseip()
+    time.sleep(1)
+    upload_directory()
     time.sleep(1)
     check_subdomains()
     time.sleep(1)
