@@ -60,7 +60,7 @@ $ python3 oasi.py -u <target> (without http:// or https:// or / at the end)
 ```
 
 ```
-python3 oasi.py -u <target> -w <wordlist path>
+$ python3 oasi.py -u <target> -w <wordlist path>
 ```
 
 ---
