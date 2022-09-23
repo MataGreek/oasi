@@ -235,14 +235,44 @@ CMS Checking...
     target = parse_url(args.url)
     wpcms = f"http://{target}/wp-content/"
     joomlacms = f"http://{target}/administrator/"
+    drupalcms = f"http://{target}/user/login"
+    drupalcms2 = f"http://{target}/user/register"
+    opencartcms = f"http://{target}/index.php?route=account/register"
+    opencartcmslog = f"http://{target}/index.php?route=account/login"
+    PrestaShopen = f"http://{target}/en/login?back=my-account"
+    PrestaShop = f"http://{target}/login?back=my-account"
     reqwp = r.get(wpcms)
     reqjoomla = r.get(joomlacms)
+    reqdrup = r.get(drupalcms)
+    reqdrup2 = r.get(drupalcms2)
+    reqopencart = r.get(opencartcms)
+    reqopencartlog = r.get(opencartcmslog)
+    reqprestashopen = r.get(PrestaShopen)
+    reqprestashop = r.get(PrestaShop)
 
     if reqwp.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a Wordpress CMS")
     elif reqjoomla.status_code == 200:
-        print(Fore.GREEN + "[INFO]" + Fore.RESET + " Seems to be a Joomla CMS")
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a Joomla! CMS")
+    elif reqdrup.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a Drupal CMS")
+    elif reqdrup2.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET + " Seems to be a Drupal CMS")
+    elif reqopencart.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a OpenCart CMS")
+    elif reqopencartlog.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a OpenCart CMS")
+    elif reqprestashopen.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a PrestaShop CMS")
+    elif reqprestashop.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a PrestaShop CMS")
     else:
         print("Can't identify CMS")
         print("")
