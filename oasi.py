@@ -223,9 +223,9 @@ def check_cms():
     print("")
     print("")
     print("""
-    ----------------
-    CMS Checking...
-    ----------------
+----------------
+CMS Checking...
+----------------
         """)
 
     print("")
