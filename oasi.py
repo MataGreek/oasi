@@ -119,7 +119,7 @@ no_choice = ['No', 'n', 'no', 'NO', 'N']
 
 #                         with open('./core/version.txt', 'w+') as pf:
 
-#                             pf.write(repver).encode()
+#                             pf.write(repver)
 
 #                     else:
 
@@ -217,6 +217,37 @@ Subdomains
     subs = sorted(set(subdomains))
     for s in subs:
         print(f'{s}')
+
+
+def check_cms():
+    print("")
+    print("")
+    print("""
+    ----------------
+    CMS Checking...
+    ----------------
+        """)
+
+    print("")
+    print("")
+    time.sleep(2)
+    args = parse_args()
+    target = parse_url(args.url)
+    wpcms = f"http://{target}/wp-content/"
+    joomlacms = f"http://{target}/administrator/"
+    reqwp = r.get(wpcms)
+    reqjoomla = r.get(joomlacms)
+
+    if reqwp.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET +
+              " Seems to be a Wordpress CMS")
+    elif reqjoomla.status_code == 200:
+        print(Fore.GREEN + "[INFO]" + Fore.RESET + " Seems to be a Joomla CMS")
+    else:
+        print("Can't identify CMS")
+        print("")
+        print("")
+        time.sleep(2)
 
 
 def upload_directory():
@@ -391,6 +422,8 @@ Directory Scanning
 
 def main():
     Banner()
+    time.sleep(1)
+    check_cms()
     time.sleep(1)
     check_host()
     time.sleep(1)
