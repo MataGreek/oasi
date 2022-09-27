@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 from ast import arg, parse
 from base64 import decode
 from cmath import e
@@ -147,6 +148,8 @@ def parse_args():
     #                     required=False, help='Create output file')
     parser.add_argument('-w', '--wordlist', type=str, metavar='',
                         required=False, help='Enter wordlist file (Leave it empty for default wordlist)')
+    parser.add_argument('-b', '--batch', type=str, metavar='',
+                        required=False, nargs='?', const='', help='Pass all inputs with default (Y/N)')
     return parser.parse_args()
 
 
@@ -253,26 +256,42 @@ CMS Checking...
     if reqwp.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a Wordpress CMS")
+        print("Tested: " + str(wpcms) + "     " +
+              ("(Status: " + str(reqwp.status_code)+")"))
     elif reqjoomla.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a Joomla! CMS")
+        print("Tested: " + str(joomlacms) + "     " +
+              ("(Status: " + str(reqjoomla.status_code)+")"))
     elif reqdrup.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a Drupal CMS")
+        print("Tested: " + str(drupalcms) + "     " +
+              ("(Status: " + str(reqdrup.status_code)+")"))
     elif reqdrup2.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET + " Seems to be a Drupal CMS")
+        print("Tested: " + str(drupalcms2)+" " +
+              ("(Status: " + str(reqdrup2.status_code)+")"))
     elif reqopencart.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a OpenCart CMS")
+        print("Tested: " + str(opencartcms)+" " +
+              ("(Status: " + str(reqopencart.status_code)+")"))
     elif reqopencartlog.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a OpenCart CMS")
+        print("Tested: " + str(opencartcmslog) + "     " +
+              ("(Status: " + str(reqopencartlog.status_code)+")"))
     elif reqprestashopen.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a PrestaShop CMS")
+        print("Tested: " + str(PrestaShopen) + "     " +
+              ("(Status: " + str(reqprestashopen.status_code)+")"))
     elif reqprestashop.status_code == 200:
         print(Fore.GREEN + "[INFO]" + Fore.RESET +
               " Seems to be a PrestaShop CMS")
+        print("Tested: " + str(PrestaShop) + "     " +
+              ("(Status: " + str(reqprestashop.status_code)+")"))
     else:
         print("Can't identify CMS")
         print("")
@@ -389,13 +408,17 @@ Usual Ports
 
 
 def inputer():
-    user_choice = input("\n\nDo you want to continue the scanning?(Y/n): ")
 
-    if user_choice in yes_choice:
-        pass
-    if user_choice in no_choice:
-        print("Exiting...")
-        sys.exit()
+    args = parse_args()
+    if args.batch is None:
+        user_choice = input("\n\nDo you want to continue the scanning?(Y/n): ")
+        if user_choice in yes_choice:
+            pass
+        if user_choice in no_choice:
+            print("Exiting...")
+            sys.exit()
+    if args.batch is not None:
+        yes_choice
 
 
 def check_dirs():
@@ -440,7 +463,7 @@ Directory Scanning
                 req2 = r.get(link2)
                 if req2.status_code == 200:
                     print("\n[+] Directory Found: ", str(link2) +
-                          "   (Status: " + str(req2.status_code) + ")    ")
+                          "   ((Status: " + str(req2.status_code) + ")    ")
                 if req2.status_code != 200:
                     spaces = ' ' * 10
                     print("\rScanning: " + str(path) + str(spaces), end='')
