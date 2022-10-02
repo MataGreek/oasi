@@ -5,8 +5,10 @@ from cmath import e
 import encodings
 from logging import exception
 from re import L
+import re
 from tabnanny import check
 from unicodedata import name
+from weakref import proxy
 import requests as r
 import http.client as httplib
 import urllib
@@ -15,6 +17,7 @@ import urllib.request
 import urllib3
 import sys
 import time
+from tqdm import tqdm, tgrange
 import colorama
 from colorama import *
 colorama.init()
@@ -150,20 +153,22 @@ def parse_args():
                         required=False, help='Enter wordlist file (Leave it empty for default wordlist)')
     parser.add_argument('-b', '--batch', type=str, metavar='',
                         required=False, nargs='?', const='', help='Pass all inputs with default (Y/N)')
+    parser.add_argument('-s', '--shell', type=str, metavar='', required=False, nargs='?',
+                        const='', help='Scan for possible web shells already uploaded in your target')
     return parser.parse_args()
 
 
 def Banner():
     print(f"""
-    
-   ____           _____ _____ 
+
+   ____           _____ _____
   / __ \   /\    / ____|_   _|
- | |  | | /  \  | (___   | |  
- | |  | |/ /\ \  \___ \  | |  
- | |__| / ____ \ ____) |_| |_ 
+ | |  | | /  \  | (___   | |
+ | |  | |/ /\ \  \___ \  | |
+ | |__| / ____ \ ____) |_| |_
   \____/_/    \_\_____/|_____|
-                              
-                              
+
+
 
   |  -----------------------------------------------------------
   |  Author: Mata
@@ -421,6 +426,42 @@ def inputer():
         yes_choice
 
 
+def shell_check():
+    print("")
+    print("")
+    print("""
+-----------------------------------
+Checking for uploaded Web Shells...
+-----------------------------------
+    """)
+    print("")
+    print("")
+    args = parse_args()
+    if args.shell is None:
+        pass
+    if args.shell is not None:
+        wlist = open('wordlist/shells.txt', 'r')
+        content = wlist.read()
+        wordlist = content.splitlines()
+
+        print(f"Trying to find uploaded web shells on " +
+              Fore.GREEN + str(target) + Fore.RESET + "...")
+        print("")
+        for path in tqdm(wordlist):
+            lnk = f"http://{target}/{path}"
+            try:
+
+                req = r.get(
+                    lnk, headers={"User-Agent": "Mozilla/5.0"})
+                if req.status_code == 200:
+                    print(
+                        Fore.RED + "\n[!] Possible Web Shell FOUND! : " + str(lnk))
+
+            except KeyboardInterrupt:
+                print("Exit")
+                sys.exit()
+
+
 def check_dirs():
     time.sleep(1)
     print(f"""
@@ -489,6 +530,8 @@ def main():
     check_subdomains()
     time.sleep(1)
     inputer()
+    time.sleep(1)
+    shell_check()
     time.sleep(1)
     check_dirs()
     time.sleep(1)
