@@ -427,19 +427,19 @@ def inputer():
 
 
 def shell_check():
-    print("")
-    print("")
-    print("""
------------------------------------
-Checking for uploaded Web Shells...
------------------------------------
-    """)
-    print("")
-    print("")
     args = parse_args()
     if args.shell is None:
         pass
     if args.shell is not None:
+        print("")
+        print("")
+        print("""
+-----------------------------------
+Checking for uploaded Web Shells...
+-----------------------------------
+    """)
+        print("")
+        print("")
         wlist = open('wordlist/shells.txt', 'r')
         content = wlist.read()
         wordlist = content.splitlines()
