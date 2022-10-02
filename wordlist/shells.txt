@@ -42,7 +42,6 @@ kntl.php
 losX.php
 mom.php
 sad.php
-cybertestshellforscript.php
 uploads/ok.php
 upload/ok.php
 upload/up.php
