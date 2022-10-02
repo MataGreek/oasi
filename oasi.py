@@ -450,12 +450,17 @@ Checking for uploaded Web Shells...
         for path in tqdm(wordlist):
             lnk = f"http://{target}/{path}"
             try:
+                proxies = {
+                    'http': 'socks5h://127.0.0.1:9050',
+                    'https': 'socks5h://127.0.0.1:9050'
+
+                }
 
                 req = r.get(
-                    lnk, headers={"User-Agent": "Mozilla/5.0"})
+                    lnk, headers={"User-Agent": "Mozilla/5.0"}, proxies=proxies)
                 if req.status_code == 200:
                     print(
-                        Fore.RED + "\n[!] Possible Web Shell FOUND! : " + str(lnk))
+                        Fore.RED + "\n[!] Possible Web Shell FOUND! : " + str(lnk) + Fore.RESET)
 
             except KeyboardInterrupt:
                 print("Exit")
