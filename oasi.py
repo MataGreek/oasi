@@ -6,6 +6,7 @@ import encodings
 from logging import exception
 from re import L
 import re
+import platform
 from tabnanny import check
 from unicodedata import name
 from weakref import proxy
@@ -16,6 +17,7 @@ import socket
 import urllib.request
 import urllib3
 import sys
+import os
 import time
 from tqdm import tqdm, tgrange
 import colorama
@@ -171,6 +173,7 @@ def Banner():
 
 
   |  -----------------------------------------------------------
+  |  Version: 2.7  
   |  Author: Mata
   |  Donation: https://www.buymeacoffee.com/mataroot
   |  -----------------------------------------------------------
@@ -381,7 +384,7 @@ Checking Domains On the same Host
 
 
 def check_ports():
-    time.sleep(1)
+    time.sleep(3)
     print(f"""
 -----------
 Usual Ports
@@ -472,29 +475,45 @@ def check_dirs():
 -------------------
 Directory Scanning
 -------------------
+
+
 """)
+    time.sleep(1)
+    print("Loading output file...")
+    print("")
+    print("")
+    time.sleep(2)
     args = parse_args()
     if args.wordlist is None:
         wlist = open('wordlist/default_wl.txt', 'r')
         content = wlist.read()
         wordlist = content.splitlines()
         word = args.wordlist
+
         for path in wordlist:
             link = f"https://{target}/{path}"
             try:
 
                 req = r.get(link)
                 if req.status_code == 200:
-                    print("\n[+] Directory Found: ", str(link) +
-                          "   (Status: " + str(req.status_code) + ")    ")
+                    global found
+                    global out
+                    out = f"{link}"
+                    found = print(
+                        f"\n[+] Directory Found: {link}  (Status: {req.status_code})")
+                    write_file()
+
                 if req.status_code != 200:
                     spaces = ' ' * 10
                     print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
+
                 print("\n[!] Exit.")
                 sys.exit()
                 pass
+        print("")
+        print('Output Saved to Output Folder')
     if args.wordlist is not None:
         wlist2 = open(args.wordlist, 'r')
         content2 = wlist2.read()
@@ -507,15 +526,29 @@ Directory Scanning
 
                 req2 = r.get(link2)
                 if req2.status_code == 200:
-                    print("\n[+] Directory Found: ", str(link2) +
-                          "   ((Status: " + str(req2.status_code) + ")    ")
+                    out = f"{link2}"
+                    found = print(
+                        f"\n[+] Directory Found: {link2}  (Status: {req2.status_code})")
+
+                    write_file()
+
                 if req2.status_code != 200:
                     spaces = ' ' * 10
                     print("\rScanning: " + str(path) + str(spaces), end='')
 
             except KeyboardInterrupt:
+
                 print("\n[!] Exit.")
                 sys.exit()
+        print("")
+        print('Output Saved to Output Folder')
+
+
+def write_file():
+
+    with open(f'./output/{target}.txt', 'a') as fp:
+        fp.write(f'{out}\n')
+        fp.close()
 
 
 def main():

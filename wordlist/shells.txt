@@ -32,6 +32,7 @@ ok.php
 00.php
 herp.php
 nptice.php
+text.txt?_t=1665175676
 tuyul.php
 nikung.php
 tertykung.php
