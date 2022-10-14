@@ -86,6 +86,22 @@ python3 oasi.py -u <target> -s (or --shell)
 <br>
 <br>
 
+# <b> --HELP (COMMANDS)
+
+```
+--help
+
+-u (--url)              (Target URL)
+-w (--wordlist)         (Directory scan wordlist path)
+-s (--shell)            (Scan for possible shells too)
+-b (--batch)            (Bypass Y/N inputs)
+```
+
+---
+
+<br>
+<br>
+
 # <b> SUPPORT ME
 
 ## <b> _Buy me a coffee below_
