@@ -6,6 +6,12 @@ administrator
 phpmyadmin
 portal
 dashboard
+giris
+kullanici
+kullanicilar
+uyerler
+turk
+anasayfa
 usr
 user
 user123
