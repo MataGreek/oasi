@@ -6,7 +6,7 @@
 
 <center>
 
-![](images/v2.6.png)
+![](images/v2.7.png)
 
 </center>
 
