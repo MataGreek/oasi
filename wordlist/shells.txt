@@ -34,6 +34,7 @@ herp.php
 nptice.php
 text.txt?_t=1665175676
 tuyul.php
+gecko.php
 nikung.php
 tertykung.php
 codrs.php
@@ -305,6 +306,7 @@ includes/joomla.rar
 includes/wp.php
 includes/buck.sql
 includes/sysadmin.php
+includes/images/gecko.php
 includes/images/c99.php
 includes/xd.php
 includes/c100.php
@@ -319,6 +321,7 @@ includes/Server.php
 includes/tmp/uploads.php
 includes/tmp/up.php
 includes/Server/
+includes/wp-admin/gecko.php
 includes/wp-admin/c99.php
 includes/tmp/priv8.php
 includes/priv8.php
@@ -432,6 +435,7 @@ files/indexx.php
 file/up.php
 file/uplod.php
 file/wso.php
+file/gecko.php
 file/idx.php
 file/up1.php
 13.php
